@@ -6,17 +6,22 @@
   //     document.body.style.overflow = "auto";
   //   }, 3000);
   // };
-
-
-  window.addEventListener('load', () => {
-    const preloader = document.querySelector('.preloader'); /* находим блок Preloader */
-    const delayTime = 3000;
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.querySelector('.preloader');
+    const delayTime = 3500;
+  
+    // Добавляем случайный параметр к URL изображений (исправляю баг)
+    const images = document.querySelectorAll('.preloader img');
+    images.forEach(img => {
+      const src = img.getAttribute('src');
+      img.setAttribute('src', `${src}?${Math.random()}`);
+    });
     // Запускаем таймер
     setTimeout(() => {
-      preloader.classList.add('preloader_hidden'); /* добавляем ему класс для скрытия */
+      preloader.classList.add('preloader_hidden');
     }, delayTime);
   });
-
 
 
 ///ТАЙМЕР
@@ -55,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return `${days} d ${hours} h ${minutes} min`;
   }
 });
+
 
 //АНИМАЦИЯ ТОГЛА (цвет и положение)
 
@@ -109,16 +115,16 @@ setTimeout(function() {
   changeLanguage(newLanguage);
 }, 500); // Длительность перехода в миллисекундах (0.5 секунды)
 }
+//Функция замены карты
 function changeLanguage(newLanguage) {
   var iframe = document.getElementById('myIframe');
   var iframeSrc = '';
 
   if (newLanguage === 'ru') {
-    iframeSrc = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1519.8976910014678!2d49.8399938!3d40.3690612!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d410ad4f0c3%3A0xfc860b5dfbdf2cc2!2sGMT%20Arena!5e0!3m2!1sru!2saz!4v1704314786844!5m2!1sru!2saz';
+    iframeSrc = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1519.9044384627778!2d49.8396743!3d40.368762!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d410ad4f0c3%3A0xfc860b5dfbdf2cc2!2sGMT%20Arena!5e0!3m2!1sru!2saz!4v1704323881882!5m2!1sru!2saz';
   } else {
     iframeSrc = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1519.8953862107353!2d49.8390926!3d40.3691634!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d410ad4f0c3%3A0xfc860b5dfbdf2cc2!2sGMT%20Arena!5e0!3m2!1saz!2saz!4v1704314875301!5m2!1saz!2saz';
   }
-
   iframe.src = iframeSrc;
 }
 
