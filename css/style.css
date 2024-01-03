@@ -1,6 +1,6 @@
 body {
  min-width: 320px;
- overflow: hidden;
+ /* overflow: hidden; */
 }
 @font-face {
   font-family: "Toxigenesis";
@@ -21,15 +21,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 11;
   background-color: #00031F;
+  opacity: 1;
+  transition: opacity 100ms ease; /* Анимация плавного исчезновения */
 }
-
 .preloader img {
-  width: 100px; 
-  height: 100px; 
+  width: 300px; 
+  height: 300px; 
 }
-
+.preloader_hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s, visibility 0s 1s;
+}
 .header {
   background-color: #00031F;
   background-blend-mode: lighten;
@@ -40,7 +45,6 @@ body {
       min-height: 488px;
   }
 }
-
 @media screen and (min-width: 768px) {
   .container {
       padding: 0 30px;
@@ -67,7 +71,6 @@ body {
       padding: 30px 0 0 0;
   }
 }
-
 @media screen and (min-width: 1199px) {
   .logo svg {
     width: 161.58px;
@@ -181,7 +184,6 @@ input[type="checkbox"]:checked + .toggle-container {
     padding-left: 150px;
   }
 }
-
 .main-info {
   display: flex;
   flex-direction: column;
@@ -193,9 +195,7 @@ input[type="checkbox"]:checked + .toggle-container {
     width: 48%;
   }
 }
-
 .main-text {
-  z-index: 1;
   color: #FFF;
   font-family: Jost;
   font-size: 14px;
@@ -215,17 +215,6 @@ input[type="checkbox"]:checked + .toggle-container {
     width: auto;
   }
 }
-.element-animation {
-/* Скроем элемент в начальном состоянии */
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.element-animation.element-show {
-  opacity: 1;
-  transition: all 1.5s;
-  transform: translateY(0%);
-}
 .main-text p:first-child {
   width: 55%;
 }
@@ -242,10 +231,6 @@ input[type="checkbox"]:checked + .toggle-container {
     width: auto;
   }
 }
-
-
-
-
 .main-oggy {
   position: absolute;
   top: 0;
@@ -254,32 +239,6 @@ input[type="checkbox"]:checked + .toggle-container {
   object-fit: cover;
   z-index: 0;
 }
-/* .main-text p:first-child {
-  width: 50%;
-}
-@media screen and (min-width: 768px) {
-  .main-text p:first-child {
-      width: 45%;
-  }
-}
-@media screen and (min-width: 1199px) {
-  .main-text p:first-child {
-      width: 65%;
-  }
-}
-.main-text p:last-child {
-  width: 35%;
-}
-@media screen and (min-width: 768px) {
-  .main-text p:last-child {
-      width: 45%;
-  }
-}
-@media screen and (min-width: 1199px) {
-  .main-text p:last-child {
-      width: 55%;
-  }
-} */
 .main-opening {
   text-align: center;
   padding-top: 30px;
@@ -340,7 +299,6 @@ input[type="checkbox"]:checked + .toggle-container {
     padding: 50px 0 120px 0;
   }
 }
-
 .about-tittle {
   padding-bottom: 40px;
   color: #1170F4;
@@ -369,8 +327,6 @@ input[type="checkbox"]:checked + .toggle-container {
       padding: 0 150px 0 150px;
   }
 }
-
-
 .about-item {
   display: flex;
   align-items: center;
@@ -417,7 +373,6 @@ input[type="checkbox"]:checked + .toggle-container {
     font-size: 20px;
   }
 }
-
 .event {
   background: linear-gradient(0deg, #1170F4 0%, #1170F4 100%), #3F3F3F;
   padding: 30px 0 30px 0;
@@ -481,7 +436,6 @@ input[type="checkbox"]:checked + .toggle-container {
     padding-bottom: 100px;
   }
 }
-
 .event-list {
   display: flex;
   justify-content: center;
@@ -502,7 +456,6 @@ input[type="checkbox"]:checked + .toggle-container {
     font-size: 24px; 
   } 
 }
-
 @media screen and (min-width: 1920px) {
   .event-list{
       font-size: 32px;
@@ -525,7 +478,6 @@ input[type="checkbox"]:checked + .toggle-container {
       padding: 20px 0 20px 60px;
   }
 }
-
 .address {
   background: #00031F;
   padding-top: 30px;
