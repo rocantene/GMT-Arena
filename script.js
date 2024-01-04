@@ -1,28 +1,33 @@
-  // preloader
-  // window.onload = function() {
-  //   setTimeout(function() {
-  //     var preloader = document.querySelector(".preloader");
-  //     preloader.style.display = "none";
-  //     document.body.style.overflow = "auto";
-  //   }, 3000);
-  // };
-  
+// preloader
   document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.querySelector('.preloader');
     const delayTime = 3500;
   
-    // Добавляем случайный параметр к URL изображений (исправляю баг)
+    // Добавляем случайный параметр к URL изображений
     const images = document.querySelectorAll('.preloader img');
     images.forEach(img => {
       const src = img.getAttribute('src');
       img.setAttribute('src', `${src}?${Math.random()}`);
     });
+  
+    // Проверяем, является ли устройство мобильным
+    const isMobile = window.innerWidth <= 768;
+  
     // Запускаем таймер
     setTimeout(() => {
       preloader.classList.add('preloader_hidden');
+  
+      // Если устройство мобильное, то восстанавливаем скролл после скрытия прелоудера
+      if (isMobile) {
+        document.body.style.overflow = 'auto';
+      }
     }, delayTime);
+  
+    // Если устройство мобильное, то запрещаем скролл во время показа прелоудера
+    if (isMobile) {
+      document.body.style.overflow = 'hidden';
+    }
   });
-
 
 ///ТАЙМЕР
 document.addEventListener("DOMContentLoaded", function() {
@@ -63,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 //АНИМАЦИЯ ТОГЛА (цвет и положение)
-
 document.getElementById('toggle').addEventListener('change', function () {
   var text1 = document.querySelector('.toggle-az');
   var text2 = document.querySelector('.toggle-ru');
@@ -77,6 +81,7 @@ document.getElementById('toggle').addEventListener('change', function () {
   }
 });
 
+//ИЗМЕНЕНИЕ ЯЗЫКА
 document.getElementById('toggle').addEventListener('change', function() {
 const toggleCircle = document.querySelector('.toggle-circle');
 toggleCircle.style.transform = this.checked ? 'translateX(30px)' : 'translateX(0)';
@@ -113,11 +118,12 @@ setTimeout(function() {
 
   // Изменяем src атрибут iframe в соответствии с новым языком
   changeLanguage(newLanguage);
-}, 500); // Длительность перехода в миллисекундах (0.5 секунды)
+}, 500); // Длительность перехода
 }
-//Функция замены карты
+
+// Функция замены карты
 function changeLanguage(newLanguage) {
-  var iframe = document.getElementById('myIframe');
+  var currentIframe = document.getElementById('myIframe');
   var iframeSrc = '';
 
   if (newLanguage === 'ru') {
@@ -125,7 +131,18 @@ function changeLanguage(newLanguage) {
   } else {
     iframeSrc = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1519.8953862107353!2d49.8390926!3d40.3691634!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d410ad4f0c3%3A0xfc860b5dfbdf2cc2!2sGMT%20Arena!5e0!3m2!1saz!2saz!4v1704314875301!5m2!1saz!2saz';
   }
-  iframe.src = iframeSrc;
+
+  // Создаем новый элемент iframe
+  var newIframe = document.createElement('iframe');
+  newIframe.id = 'myIframe';
+  newIframe.src = iframeSrc;
+  newIframe.width = currentIframe.width;
+  newIframe.height = currentIframe.height;
+  newIframe.frameBorder = currentIframe.frameBorder;
+  newIframe.allowFullscreen = currentIframe.allowFullscreen;
+
+  // Заменяем текущий iframe новым
+  currentIframe.parentNode.replaceChild(newIframe, currentIframe);
 }
 
 // Пример данных для переключения языка
